@@ -2,6 +2,9 @@ import logo from "./logo.svg";
 import "./App.css";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+
 import Select from "react-select";
 import styled from "styled-components";
 
@@ -10,6 +13,9 @@ function App() {
     { value: "Option1", label: "Option 1" },
     { value: "Option2", label: "Option 2" },
     { value: "Option3", label: "Option 3" },
+    { value: "Option4", label: "Option 4" },
+    { value: "Option5", label: "Option 5" },
+    { value: "Option6", label: "Option 6" },
   ];
 
   const [selectedValues, setSelectedValues] = useState([]);
@@ -17,7 +23,25 @@ function App() {
   const handleChange = (selectedOption) => {
     setSelectedValues(selectedOption);
   };
-
+  const customStyles = {
+    multiValue: (provided, state) => ({
+      ...provided,
+      borderRadius: "20px", // Adjust the radius as needed
+      backgroundColor: "#007bff",
+      color: "white",
+    }),
+    multiValueLabel: (provided, state) => ({
+      ...provided,
+      color: "white",
+    }),
+    multiValueRemove: (provided, state) => ({
+      ...provided,
+      color: "white",
+      ":hover": {
+        backgroundColor: "#0056b3",
+      },
+    }),
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted with value:", selectedValues);
@@ -26,8 +50,9 @@ function App() {
   const SubmitButton = styled.button`
     padding: 10px;
     font-size: 16px;
-    margin-right: 10px; 
-    margin-left: 150px; 
+    margin-right: 10px;
+    margin-top: 50px;
+    margin-left: 400px;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -53,9 +78,13 @@ function App() {
             value={selectedValues}
             onChange={handleChange}
             placeholder="Select values"
+            styles={customStyles}
           />
         </div>
-        <SubmitButton type="submit">Submit</SubmitButton>
+        <SubmitButton type="submit">
+        <FontAwesomeIcon icon={faCheck} style={{ marginRight: "5px" }} />
+          Submit
+        </SubmitButton>
       </form>
     </div>
   );

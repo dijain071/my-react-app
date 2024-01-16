@@ -23,10 +23,11 @@ function App() {
   const handleChange = (selectedOption) => {
     setSelectedValues(selectedOption);
   };
+
   const customStyles = {
     multiValue: (provided, state) => ({
       ...provided,
-      borderRadius: "20px", // Adjust the radius as needed
+      borderRadius: "20px",
       backgroundColor: "#007bff",
       color: "white",
     }),
@@ -42,21 +43,24 @@ function App() {
       },
     }),
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted with value:", selectedValues);
   };
 
   const SubmitButton = styled.button`
+    display: flex;
+    align-items: center;
     padding: 10px;
     font-size: 16px;
-    margin-right: 10px;
-    margin-top: 50px;
-    margin-left: 400px;
+    margin-top: 20px; /* Adjust the margin-top */
     background-color: #007bff;
     color: #fff;
+    margin:20px;
     border: none;
     border-radius: 5px;
+    justify-content: center;
     cursor: pointer;
     transition: background-color 0.3s, box-shadow 0.3s;
 
@@ -65,26 +69,31 @@ function App() {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
   `;
+  const WrapperContainer = styled.div`
+    display: flex; 
+    align-items: flex-end; /* Align items to the bottom */
+  `;
 
   return (
     <div className="App">
       <h1>Task Assignment!</h1>
-
       <form onSubmit={handleSubmit}>
-        <div className="wrapper">
-          <Select
-            isMulti
-            options={data}
-            value={selectedValues}
-            onChange={handleChange}
-            placeholder="Select values"
-            styles={customStyles}
-          />
-        </div>
-        <SubmitButton type="submit">
-        <FontAwesomeIcon icon={faCheck} style={{ marginRight: "5px" }} />
-          Submit
-        </SubmitButton>
+        <WrapperContainer>
+          <div className="wrapper">
+            <Select
+              isMulti
+              options={data}
+              value={selectedValues}
+              onChange={handleChange}
+              placeholder="Select values"
+              styles={customStyles}
+            />
+          </div>
+          <SubmitButton type="submit">
+            <FontAwesomeIcon icon={faCheck} style={{ marginRight: "5px" }} />
+            Submit
+          </SubmitButton>
+        </WrapperContainer>
       </form>
     </div>
   );
